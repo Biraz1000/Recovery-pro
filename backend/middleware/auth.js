@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.startsWith('Bearer ')
-        ? authHeader.slice(7)
+    const BEARER_PREFIX = 'Bearer ';
+    const token = authHeader && authHeader.startsWith(BEARER_PREFIX)
+        ? authHeader.slice(BEARER_PREFIX.length)
         : null;
 
     if (!token) {
